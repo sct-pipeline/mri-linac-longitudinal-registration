@@ -23,10 +23,10 @@ pip install -r requirements.txt
 ## Registration and evaluate similarity metrics:
 ```
 cd scripts
-./intersession_registration.sh 
+./registration_and_evaluation.sh
 ```
 
-## Evaluate similarity metrics on one subject
+## Evaluate similarity metrics on a single subject
 
 ``` 
 python scripts/calculate_similarity_metrics.py -ses2_file Fixed.nii.gz  -ses1reg_file Registered.nii.gz  -acquisition T2w -method SCT_rigid -mask_file Fixed_sc.nii.gz  -o metrics_registration_T2w.csv
