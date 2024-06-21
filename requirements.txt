@@ -1,6 +1,9 @@
-numpy
-nibabel
 pandas
+nibabel
+matplotlib
+numpy
 scikit-image
 scipy
 scikit-learn
+seaborn
+statannotations
