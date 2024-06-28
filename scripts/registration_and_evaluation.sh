@@ -13,7 +13,7 @@
 mkdir -p metrics
 
 # Path to dataset directory
-bids_file="head-neck-tumor-challenge-2024"
+bids_file="../../head-neck-tumor-challenge-2024"
 
 # Function to perform registration and evaluate metrics
 register_and_evaluate() {
@@ -61,25 +61,25 @@ register_and_evaluate() {
                             -param step=0,type=label,algo=syn,metric=CC,iter=0:step=1,type=seg,algo=slicereg,metric=MeanSquares:step=2,type=im,algo=dl,metric=CC \
                             -ofolder sct_dl
     # QC generation
-    sct_qc                  -i $bids_file/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w.nii.gz"  \
-                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz" \
-                            -d  $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz" \
+    sct_qc                  -i $bids_file/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w.nii.gz"  \
+                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
+                            -d  $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -p sct_deepseg_lesion -plane sagittal -qc qc-non-FatSup
-    sct_qc                  -i $bids_file/sub-$sub/ses-2/anat/sub-$sub"_ses-1_acq-ax_desc-registered_T2w.nii.gz"  \
-                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
-                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
+    sct_qc                  -i $bids_file/sub-$sub/ses-2/anat/sub-$sub"_ses-1_acq-${acq_suffix}_desc-registered_T2w.nii.gz"  \
+                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
+                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
                             -p sct_deepseg_lesion -plane sagittal -qc qc-non-FatSup
-    sct_qc                  -i sct_rigid/sub-$sub"_ses-1_acq-ax_T2w_reg.nii.gz"  \
-                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
-                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
+    sct_qc                  -i sct_rigid/sub-$sub"_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz"  \
+                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
+                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
                             -p sct_deepseg_lesion -plane sagittal -qc qc-non-FatSup
-    sct_qc                  -i sct_syn/sub-$sub"_ses-1_acq-ax_T2w_reg.nii.gz"  \
-                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
-                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
+    sct_qc                  -i sct_syn/sub-$sub"_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz"  \
+                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
+                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
                             -p sct_deepseg_lesion -plane sagittal -qc qc-non-FatSup
-    sct_qc                  -i sct_dl/sub-$sub"_ses-1_acq-ax_T2w_reg.nii.gz"  \
-                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
-                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-ax_T2w_label-SC_seg.nii.gz"  \
+    sct_qc                  -i sct_dl/sub-$sub"_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz"  \
+                            -s $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
+                            -d $bids_file/derivatives/labels/sub-$sub/ses-2/anat/sub-$sub"_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"  \
                             -p sct_deepseg_lesion -plane sagittal -qc qc-non-FatSup
 
     # 5.Registration to PAM50 
