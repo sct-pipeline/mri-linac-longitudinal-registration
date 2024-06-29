@@ -36,8 +36,8 @@ register_and_evaluate() {
     # 3.Rigid registration
     sct_register_multimodal -i "$bids_file/sub-$sub/ses-1/anat/sub-${sub}_ses-1_acq-${acq_suffix}_T2w.nii.gz" \
                             -d "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
-                            -ilabel "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
-                            -dlabel "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
+                            -ilabel "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
+                            -dlabel "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
                             -iseg   "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -dseg   "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -param step=0,type=label,algo=syn,metric=CC,iter=0:step=1,type=seg,algo=slicereg,metric=MeanSquares:step=2,type=im,algo=rigid,metric=CC \
@@ -45,8 +45,8 @@ register_and_evaluate() {
     # Syn registration
     sct_register_multimodal -i "$bids_file/sub-$sub/ses-1/anat/sub-${sub}_ses-1_acq-${acq_suffix}_T2w.nii.gz" \
                             -d "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
-                            -ilabel "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
-                            -dlabel "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
+                            -ilabel "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
+                            -dlabel "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
                             -iseg   "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -dseg   "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -param step=0,type=label,algo=syn,metric=CC,iter=0:step=1,type=seg,algo=slicereg,metric=MeanSquares:step=2,type=im,algo=syn,metric=CC \
@@ -54,8 +54,8 @@ register_and_evaluate() {
     # Dl registration
     sct_register_multimodal -i "$bids_file/sub-$sub/ses-1/anat/sub-${sub}_ses-1_acq-${acq_suffix}_T2w.nii.gz" \
                             -d "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
-                            -ilabel "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
-                            -dlabel "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
+                            -ilabel "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
+                            -dlabel "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
                             -iseg   "label_vertebrae/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -dseg   "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                             -param step=0,type=label,algo=syn,metric=CC,iter=0:step=1,type=seg,algo=slicereg,metric=MeanSquares:step=2,type=im,algo=dl,metric=CC \
@@ -84,7 +84,7 @@ register_and_evaluate() {
 
     # 5.Registration to PAM50 
     sct_register_to_template    -i      "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
-                                -ldisc  "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_vlabels.nii.gz" \
+                                -ldisc  "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg_labeled_discs.nii.gz" \
                                 -s      "label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz" \
                                 -c      t2 -ofolder sct_pam50
     
