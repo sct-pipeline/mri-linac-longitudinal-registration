@@ -131,5 +131,5 @@ done
 
 # Registration and evaluation for fat-suppressed images
 #for subject in "${fat_sup_subjects[@]}"; do
-#    register_and_evaluate $subject "ax-FS"
+#    register_and_evaluate $subject "axFatSup"
 #done
