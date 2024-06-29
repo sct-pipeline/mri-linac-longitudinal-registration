@@ -9,6 +9,9 @@
 # 
 # Author: Nilser Laines Medina
 
+# Exit the script if any command fails
+set -e
+
 # Create the metrics directory if it doesn't exist
 mkdir -p metrics
 
