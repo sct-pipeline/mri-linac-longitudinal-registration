@@ -83,7 +83,8 @@ def main(ses2_file, ses1reg_file, acquisition, method, mask_file=None, output_cs
 
     # Calculate similarity metrics
     correlation_coefficient, _ = pearsonr(image_ses2.ravel(), image_ses1_reg.ravel())
-    ssim_index, _ = ssim(image_ses2, image_ses1_reg, full=True)
+    ssim_index, _ = ssim(image_ses2, image_ses1_reg, data_range=1, full=True)  # Add data_range=1
+
     mse = np.mean((image_ses2 - image_ses1_reg) ** 2)
     ncc = np.corrcoef(image_ses2.ravel(), image_ses1_reg.ravel())[0, 1]
     nmi = calculate_nmi(image_ses2, image_ses1_reg)

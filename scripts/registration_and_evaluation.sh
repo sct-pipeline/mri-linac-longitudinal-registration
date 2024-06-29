@@ -3,9 +3,9 @@
 # This script does the following:
 # 1. Registration all T2w non-fat-suppresed and fat suppresed images
 # -- Registration from ses-01 to ses02
-# -- Registration using sct_register_multimodal
-# -- Registration only using anat images (not yet SC, not yet vertebral levels)
+# -- Generation of QC of registration
 # -- Calculate the similarity metrics on registered images
+# -- Registration of ses-2 to PAM50
 # 
 # Author: Nilser Laines Medina
 
@@ -100,18 +100,22 @@ register_and_evaluate() {
     
     # Calculate similarity masked by the SC
     local mask_file="label_vertebrae/sub-${sub}_ses-2_acq-${acq_suffix}_T2w_label-SC_seg.nii.gz"
+    echo "Running: python calculate_similarity_metrics.py -ses2_file \"$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz\" -ses1reg_file \"$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-1_acq-${acq_suffix}_desc-registered_T2w.nii.gz\" -acquisition T2w -method challenge -mask_file \"$mask_file\" -o \"metrics/challenge_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv\""
     python calculate_similarity_metrics.py -ses2_file "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
                                            -ses1reg_file "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-1_acq-${acq_suffix}_desc-registered_T2w.nii.gz" \
                                            -acquisition T2w -method challenge  -mask_file "$mask_file" \
                                            -o "metrics/challenge_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv"
+    echo "Running: python calculate_similarity_metrics.py -ses2_file \"$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz\" -ses1reg_file \"sct_rigid/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz\" -acquisition T2w -method sct_rigid -mask_file \"$mask_file\" -o \"metrics/rigid_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv\""
     python calculate_similarity_metrics.py -ses2_file "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
                                            -ses1reg_file "sct_rigid/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz" \
                                            -acquisition T2w -method sct_rigid  -mask_file "$mask_file" \
                                            -o "metrics/rigid_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv"
+    echo "Running: python calculate_similarity_metrics.py -ses2_file \"$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz\" -ses1reg_file \"sct_syn/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz\" -acquisition T2w -method sct_syn -mask_file \"$mask_file\" -o \"metrics/syn_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv\""
     python calculate_similarity_metrics.py -ses2_file "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
                                            -ses1reg_file "sct_syn/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz" \
                                            -acquisition T2w -method sct_syn  -mask_file "$mask_file" \
                                            -o "metrics/syn_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv"
+    echo "Running: python calculate_similarity_metrics.py -ses2_file \"$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz\" -ses1reg_file \"sct_dl/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz\" -acquisition T2w -method sct_dl -mask_file \"$mask_file\" -o \"metrics/dl_sub-${sub}_ses-2_acq-${acq_suffix}_T2w_masked.csv\""    
     python calculate_similarity_metrics.py -ses2_file "$bids_file/sub-$sub/ses-2/anat/sub-${sub}_ses-2_acq-${acq_suffix}_T2w.nii.gz" \
                                            -ses1reg_file "sct_dl/sub-${sub}_ses-1_acq-${acq_suffix}_T2w_reg.nii.gz" \
                                            -acquisition T2w -method sct_dl -mask_file "$mask_file" \
